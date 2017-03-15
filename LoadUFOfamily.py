@@ -5,6 +5,7 @@ Loads a family of UFOs. Choose the Regular face and all others in the same folde
 """
 """
 To Do:
+- Work around autosave problem
 - Add support for custom master sets
 """
 __copyright__ = 'Copyright (c) 2017, SIL International  (http://www.sil.org)'
