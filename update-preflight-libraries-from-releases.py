@@ -31,7 +31,7 @@ tell application "Finder"
 
 		tell window 1
 
-			do script "sudo -H  /usr/local/bin/pip install --no-warn-script-location --disable-pip-version-check --upgrade --user git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/DesignSpaceDocument.git@master#egg=DesignSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user "
+			do script "sudo -H  /usr/local/bin/pip install --no-warn-script-location --disable-pip-version-check --upgrade --user git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.2.1#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/DesignSpaceDocument.git@master#egg=DesignSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user "
 
 		end tell
 
