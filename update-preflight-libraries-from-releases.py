@@ -31,7 +31,7 @@ tell application "Finder"
 
 		tell window 1
 
-			do script "sudo -H  /usr/local/bin/pip install --no-warn-script-location --disable-pip-version-check --upgrade --user git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.2.1#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/DesignSpaceDocument.git@master#egg=DesignSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user "
+			do script "sudo -H /usr/local/bin/pip install --no-warn-script-location --disable-pip-version-check --upgrade --user git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.2.1#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user "
 
 		end tell
 
@@ -40,8 +40,17 @@ tell application "Finder"
 end tell
 
 tell application "Finder"
-	display notification "Updating your preflight dependencies, please enter your user password. The version numbers of the libraries will be indicated in the output. Watch for errors in the output, when done you can close the window" with title "Preflight dependencies update" sound name "default"
+	display notification "Updating, enter your password." with title "Preflight dependencies" sound name "default"
 end tell
+
+tell application "Finder"
+	display notification "Libraries versions: see output" with title "Preflight dependencies versions"
+end tell
+
+tell application "Finder"
+	display notification "Watch for errors, when done close the window" with title "Preflight errors"
+end tell
+
 
 
 """
