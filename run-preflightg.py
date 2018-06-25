@@ -45,11 +45,17 @@ tell application "Finder"
 
 end tell
 
-
 tell application "Finder"
-	display notification "Running preflightg on your project, watch for errors in the output, when done you can close the window" with title "Preflightg" sound name "default"
+	display notification "Running preflightg" with title "Preflightg" sound name "default"
 end tell
 
+tell application "Finder"
+	display notification "Watch for output errors (or log files)" with title "Preflightg errors"
+end tell
+
+tell application "Finder"
+	display notification "When done, close this Terminal window" with title "Preflightg close"
+end tell
 
 
 """
