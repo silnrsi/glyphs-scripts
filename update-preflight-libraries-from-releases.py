@@ -8,6 +8,8 @@ __copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
 __license__ = 'Released under the MIT License (http://opensource.org/licenses/MIT)'
 __author__ = 'Nicolas Spalinger'
 
+# we are targetting the following user folder for installation /Users/nameofyouruser/Library/Python/2.7/lib/python/site-packages
+
 import GlyphsApp
 from subprocess import Popen, PIPE
 
@@ -31,7 +33,7 @@ tell application "Finder"
 
 		tell window 1
 
-			do script "sudo -H /usr/local/bin/pip install --no-warn-script-location --disable-pip-version-check --upgrade --user git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.2.1#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user "
+			do script "cd /tmp; sudo pip install --upgrade --user --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.2.1#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user"
 
 		end tell
 
@@ -48,7 +50,7 @@ tell application "Finder"
 end tell
 
 tell application "Finder"
-	display notification "Watch for errors, when done close the window" with title "Preflight errors"
+	display notification "Watch for errors, when done close the window" with title "Installation errors"
 end tell
 
 
