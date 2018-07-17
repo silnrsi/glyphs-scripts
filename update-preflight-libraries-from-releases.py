@@ -33,7 +33,7 @@ tell application "Finder"
 
 		tell window 1
 
-			do script "cd /tmp; sudo pip install --upgrade --user --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@v1.3.0#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.2.1#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  pip list --format=columns --disable-pip-version-check --user"
+			do script "cd /tmp; sudo pip install --upgrade --user --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools MutatorMath ufoLib defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  pip list --format=columns --user"
 
 		end tell
 
