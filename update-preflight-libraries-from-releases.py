@@ -42,7 +42,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python; python --version; python2.7 -m pip --version; sudo python2.7 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; sudo python2.7 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  python2.7 -m pip list --format=columns --user"
+	        	do script "which python; python --version; python2.7 -m pip --version; sudo python2.7 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; python2.7 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@v0.3.4#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  python2.7 -m pip list --format=columns --user"
 
 		end tell
 
