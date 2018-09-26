@@ -1,7 +1,7 @@
-#MenuTitle: Update the preflight libraries from releases (pysilfont from master)
+#MenuTitle: Update the preflight libraries from releases (pysilfont from master) py3
 # -*- coding: utf-8 -*-
 __doc__="""
-Update the preflight libraries from releases (pysilfont from master)
+Update the preflight libraries from releases (pysilfont from master) py3
 """
 
 __copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
@@ -9,9 +9,9 @@ __license__ = 'Released under the MIT License (http://opensource.org/licenses/MI
 __author__ = 'Nicolas Spalinger'
 
 # if you installed pip via get-pip.py then you need to make the following configuration changes:
-# we're targetting the following user folder for installation /Users/nameofyouruser/Library/Python/2.7/lib/python/site-packages
-# and the scripts go to /Users/nameofyouruser/Library/Python/2.7/bin/ so this will need to be in your path
-# if not add export PATH=~/Library/Python/2.7/bin:$PATH to your ~/.bash_profile
+# we're targetting the following user folder for installation /Users/nameofyouruser/Library/Python/3.*/lib/python/site-packages
+# and the scripts go to /Users/nameofyouruser/Library/Python/3.*/bin/ so this will need to be in your path
+# if not add export PATH=~/Library/Python/3.*/bin:$PATH to your ~/.bash_profile
 #
 # if you installed (or updated) pip via brew (from brew.sh) then it will use /usr/local instead
 # and so you don't have to change path configurations or add launchers manually. 
@@ -42,7 +42,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python; python --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; python3 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@v0.3.4#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  python3 -m pip list --format=columns --user"
+	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; python3 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  python3 -m pip list --format=columns --user"
 
 		end tell
 
