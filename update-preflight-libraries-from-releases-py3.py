@@ -14,7 +14,7 @@ __author__ = 'Nicolas Spalinger'
 # if not add export PATH=~/Library/Python/3.*/bin:$PATH to your ~/.bash_profile
 #
 # if you installed (or updated) pip via brew (from brew.sh) then it will use /usr/local instead
-# and so you don't have to change path configurations or add launchers manually. 
+# and so you don't have to change path configurations or add launchers manually.
 
 # note that this script tries to uninstall any previously installed libraries (which might be in other paths throughout the system)
 
@@ -42,7 +42,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; python3 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  python3 -m pip list --format=columns --user"
+	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; python3 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath ;  python3 -m pip list --format=columns --user"
 
 		end tell
 
