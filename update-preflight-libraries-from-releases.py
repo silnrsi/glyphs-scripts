@@ -8,15 +8,8 @@ __copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
 __license__ = 'Released under the MIT License (http://opensource.org/licenses/MIT)'
 __author__ = 'Nicolas Spalinger'
 
-# if you installed pip via get-pip.py then you need to make the following configuration changes:
-# we're targetting the following user folder for installation /Users/nameofyouruser/Library/Python/2.7/lib/python/site-packages
-# and the scripts go to /Users/nameofyouruser/Library/Python/2.7/bin/ so this will need to be in your path
-# if not add export PATH=~/Library/Python/2.7/bin:$PATH to your ~/.bash_profile
-#
-# if you installed (or updated) pip via brew (from brew.sh) then it will use /usr/local instead
-# and so you don't have to change path configurations or add launchers manually. 
-
-# note that this script tries to uninstall any previously installed libraries (which might be in other paths throughout the system)
+# using brew and sudo we expect launchers to be put into /usr/local/bin/ and the libs in /usr/local/lib
+# but if you install manually with --user you will need to add ~/Library/Python/2.7/bin to your PATH in ~/.bash_profile
 
 
 import GlyphsApp
@@ -42,7 +35,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python; python --version; python2.7 -m pip --version; sudo python2.7 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; python2.7 -m pip install --upgrade --user --no-cache-dir --no-warn-script-location git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  python2.7 -m pip list --format=columns --user"
+	        	do script "which python; python --version; python2.7 -m pip --version; sudo python2.7 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; sudo python2.7 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  sudo python2.7 -m pip list --format=columns"
 
 		end tell
 
