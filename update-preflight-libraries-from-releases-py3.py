@@ -35,7 +35,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; sudo python3 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath ; sudo python3 -m pip list --format=columns"
+	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; sudo python3 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v3.1.1#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath ; sudo python3 -m pip list --format=columns"
 
 		end tell
 
