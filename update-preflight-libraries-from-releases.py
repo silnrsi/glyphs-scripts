@@ -1,7 +1,7 @@
-#MenuTitle: Update the preflight libraries from releases (pysilfont from master)
+#MenuTitle: Update the preflight libraries from releases (pysilfont from master) py2
 # -*- coding: utf-8 -*-
 __doc__="""
-Update the preflight libraries from releases (pysilfont from master)
+Update the preflight libraries from releases (pysilfont from master) py2
 """
 
 __copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
@@ -35,7 +35,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python; python --version; python2.7 -m pip --version; sudo python2.7 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath designSpaceDocument; sudo python2.7 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath git+https://github.com/LettError/designSpaceDocument.git@master#egg=designSpaceDocument ;  sudo python2.7 -m pip list --format=columns"
+	        	do script "which python; python --version; python2.7 -m pip --version; sudo python2.7 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath; sudo python2.7 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v2.4.0#egg=glyphsLib fontTools mutatorMath ufoLib git+https://github.com/typesupply/defcon.git@0.3.5#egg=defcon fontMath ;  psfversion "
 
 		end tell
 
