@@ -35,7 +35,7 @@ tell application "Finder"
 
 		tell window 1
 
-	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath; sudo python3 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlei18n/GlyphsLib.git@v3.1.4#egg=glyphsLib fontTools fs mutatorMath defcon fontMath ; echo 'Please check to make sure these dependencies have been installed correctly: defcon, fontMath, fontTools, glyphsLib, MutatorMath and pysilfont. Only these dependencies are needed for preflight, other libraries can be reported as missing without problems. '; psfversion"
+	        	do script "which python3; python3 --version; python3 -m pip --version; sudo python3 -m pip uninstall --yes pysilfont glyphsLib fontTools mutatorMath ufoLib defcon fontMath; sudo python3 -m pip install --upgrade --no-cache-dir git+https://github.com/silnrsi/pysilfont.git@master#egg=pysilfont git+https://github.com/googlefonts/GlyphsLib.git@v4.1.0#egg=glyphsLib fontTools fs mutatorMath defcon fontMath ; echo 'Please check to make sure these dependencies have been installed correctly: defcon, fontMath, fontTools, glyphsLib, MutatorMath and pysilfont. Only these dependencies are needed for preflight, other libraries can be reported as missing without problems. '; psfversion"
 
 		end tell
 
