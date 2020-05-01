@@ -1,7 +1,9 @@
-#MenuTitle: Update the preflight libraries from releases (pysilfont from master) py3
+#MenuTitle: Update the preflight libraries from releases (pysilfont from master)
 # -*- coding: utf-8 -*-
-__doc__="""
-Update the preflight libraries from releases (pysilfont/glyphsLib from master) py3
+from __future__ import division, print_function, unicode_literals
+
+__doc__ = """
+Update the preflight libraries from releases (pysilfont/glyphsLib from master)
 """
 
 __copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
@@ -17,12 +19,12 @@ from subprocess import Popen, PIPE
 
 
 def runAppleScript(scpt, args=[]):
-	p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-	stdout, stderr = p.communicate(scpt)
-	if stderr:
-		print "AppleScript Error:"
-		print stderr.decode('utf-8')
-	return stdout
+        p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = p.communicate(scpt)
+        if stderr:
+                print("AppleScript Error:")
+                print(stderr.decode('utf-8'))
+        return stdout
 
 
 preflightupdate = """
@@ -59,4 +61,4 @@ end tell
 
 """
 
-save   = runAppleScript( preflightupdate )
+save = runAppleScript(preflightupdate)
