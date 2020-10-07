@@ -1,4 +1,4 @@
-#MenuTitle: Update the preflight libraries from releases (pysilfont from master)
+#MenuTitle: Update preflight libraries (pysilfont + glyphsLib from master) 
 # -*- coding: utf-8 -*-
 from __future__ import division, print_function, unicode_literals
 
@@ -6,7 +6,7 @@ __doc__ = """
 Update the preflight libraries from releases (pysilfont/glyphsLib from master)
 """
 
-__copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
+__copyright__ = 'Copyright (c) 2020, SIL International  (http://www.sil.org)'
 __license__ = 'Released under the MIT License (http://opensource.org/licenses/MIT)'
 __author__ = 'Nicolas Spalinger'
 
