@@ -6,7 +6,7 @@ __doc__ = """
 Runs the preflightg - G for Glyphs - shell script from your chosen project folder
 """
 
-__copyright__ = 'Copyright (c) 2020, SIL International  (http://www.sil.org)'
+__copyright__ = 'Copyright (c) 2021, SIL International  (http://www.sil.org)'
 __license__ = 'Released under the MIT License (http://opensource.org/licenses/MIT)'
 __author__ = 'Nicolas Spalinger'
 
@@ -15,7 +15,7 @@ from subprocess import Popen, PIPE
 
 
 def runAppleScript(scpt, args=[]):
-        p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding='utf8')
         stdout, stderr = p.communicate(scpt)
         if stderr:
                 print("AppleScript Error:")
