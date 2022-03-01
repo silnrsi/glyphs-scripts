@@ -11,7 +11,7 @@ __author__ = 'Nicolas Spalinger'
 
 # using brew and sudo we expect launchers to be put into /usr/local/bin/ and the libs in /usr/local/lib
 # but if you install manually with --user you will need to add the following to ~/.bash_profile:
-export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+# export PATH="$PATH:$HOME/Library/Python/3.9/bin"
 
 from subprocess import Popen, PIPE
 import GlyphsApp
