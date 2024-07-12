@@ -1,4 +1,4 @@
-# MenuTitle: Build comps from SIL defs
+# MenuTitle: Build composites from SIL definitions
 # -*- coding: utf-8 -*-
 from __future__ import division, print_function, unicode_literals
 __doc__ = """
@@ -10,10 +10,8 @@ __author__ = 'Victor Gaultney'
 # Based heavily on psfbuildcomp.py and comp.py from pysilfont (https://github.com/silnrsi/pysilfont/) 
 
 # TO DO
-# Remove old temp data and comments and debugging
 # Test again with more data
 # Support setting of Pendot override parameters
-# Respect addGlyphs option
 # Cell coloring
 # Error checking
 # Replace print with proper error log
@@ -23,27 +21,18 @@ import re
 from Foundation import NSPoint
 from GlyphsApp import Glyphs, GSGlyph, GSComponent
 
+Glyphs.clearLog()  # clears log in Macro window
+
 # defs and settings
 thisFont = Glyphs.font  # frontmost font
 thisFontMaster = thisFont.selectedFontMaster  # active master
 thisMasterID = thisFontMaster.id
 compDefsFilename = "compositestest.txt"  # relative to thisFont file - eventually to be replaced with user choice
-addGlyphs = False    # should glyphs that don't exist in the font be added? Option not yet supported - glyph will be added
+addGlyphs = False    # should glyphs that don't exist in the font be added?
 
-Glyphs.clearLog()  # clears log in Macro window
+### DEFINE REGEXES AND CompSpec CLASS - REVISED TO NOT USE ElementTree
 
-# temp stuff
-oldtargetname = "iacute"
-oldbasename = "idotless"
-oldmarkname = "acutecomb"
-oldanchorbase = "top"
-oldanchormark = "_" + oldanchorbase
-
-### PARSE COMP DEFS AND CREATE CompSpec OBJECT (taken from comp.py)
-### REVISED TO NOT USE ElementTree
-
-# REs to parse (from right to left) comment, SIL extension parameters, colorinfo, UID, metrics,
-# and (from left) glyph name
+# REs to parse (from right to left) comment, SIL extension parameters, colorinfo, UID, metrics, and (from left) glyph name
 
 # Extract comment from end of line (NB: Doesn't use re.VERBOSE because it contains #.)
 # beginning of line, optional whitespace, remainder, optional whitespace, comment to end of line
@@ -152,7 +141,7 @@ class CompSpec:
 
     def parsefromcompdefline(self):
         """Parse the composite glyph information (in self.compdefline) such as:
-        LtnCapADiear = LtnCapA + CombDiaer@U |00C4 ! 1, 0, 0, 1 # comment
+        LtnCapADiaer = LtnCapA + CombDiaer@U |00C4 ! 1, 0, 0, 1 # comment
         and return a list of component specs.
         Position info after @ can include optional base glyph name followed by colon.
         """
@@ -174,8 +163,6 @@ class CompSpec:
         # At this point results optionally may contain entries for any of 'noteinfo', 'paraminfo', 'colorinfo', 'UID', or 'metrics', 
         # but it must have 'PSName' if any of 'paraminfo', 'colorinfo', 'UID', or 'metrics' present
 
-        #print("R=", results)
-
         self.psname = results['PSName']
         if 'PSName' not in results:
             if len(results) > 0:
@@ -186,16 +173,22 @@ class CompSpec:
         if 'noteinfo' in results:
             note = results.pop('noteinfo', None)
             notetext = note.rstrip()
-            self.note = notetext
+        else:
+            notetext = None
+        self.note = notetext
 
         if 'colorinfo' in results:
             color = results.pop('colorinfo', None)
-            self.color = color
+        else:
+            color = None
+        self.color = color
 
-        if 'UID' in results:
+        UIDpresent = 'UID' in results
+        if UIDpresent:
             uid = results.pop('UID')
-            self.uid = uid
-            UIDpresent = True
+        else:
+            uid = None
+        self.uid = uid
 
         paramsdic = {}
 
@@ -303,12 +296,8 @@ def loadLocalFile( currFont, filename ): # read file in cuttent font's directory
     fin.close()
     return contents
 
-def updateGlyph(name, comps, anchors, width, uid): # create or update glyph from spec
+def updateExistingGlyph(name, comps, anchors, width, uid): # create or update glyph from spec
     target = thisFont.glyphs[name]
-    if not target:  # will always create a new glyph if not currently in font
-        target = GSGlyph()
-        target.name = name
-        thisFont.glyphs.append(target)
     target.unicode = uid
     targetLayer = target.layers[thisMasterID]
     targetLayer.clear()
@@ -319,14 +308,12 @@ def updateGlyph(name, comps, anchors, width, uid): # create or update glyph from
         targetLayer.anchors[anchor['ancname']] = GSAnchor()
         targetLayer.anchors[anchor['ancname']].position = NSPoint(anchor['posX'], anchor['posY'])
     targetLayer.width = width
+    print("Glyph %s updated" % name)
 
 ### MAIN ROUTINE
 
 # grab comp defs into a list
 compDefs = loadLocalFile( thisFont, compDefsFilename )
-print(">>>>> Full file content:")
-print( compDefs, "\n" )
-print(">>>>> Individual contents:")
 
 # parse the list and process as composite specification objects
 csobj = CompSpec()
@@ -342,10 +329,12 @@ for rawCDLine in compDefs.splitlines():
         print("Parsing error: " + str(mess))
         continue
 
+    # required attributes
     cdl = csobj.compdefline
     targetGlyphName = csobj.psname
-    uid = csobj.uid
     glyphlist = csobj.glyphlist
+    # optional attributes
+    uid = csobj.uid
     n = csobj.note          # will currently be ignored when building composite
     c = csobj.color         # will currently be ignored when building composite
     pd = csobj.paramsdic    # will currently be ignored when building composite
@@ -426,63 +415,14 @@ for rawCDLine in compDefs.splitlines():
     print('width >', xadvance)
     print('uid >', uid)
 
-    updateGlyph(targetGlyphName, components, targetAnchors, xadvance, uid)
+    target = thisFont.glyphs[targetGlyphName]
+    if not target:  # if glyph does not exist in font
+        if addGlyphs:
+            target = GSGlyph()
+            target.name = targetGlyphName
+            thisFont.glyphs.append(target)
+        else:
+            print("Specified glyph %s not found in font" % targetGlyphName)
+            continue
 
-"""updateGlyph("IJ",
-    [{'name': 'I', 'offsetX': 0, 'offsetY': 0}, {'name': 'J', 'offsetX': 1500, 'offsetY': 0}],
-    [{'ancname': 'top', 'posX': 1365, 'posY': 1770}, {'ancname': 'bottom', 'posX': 1365, 'posY': -100}],
-    2730, "0132")
-updateGlyph("ij",
-    [{'name': 'i', 'offsetX': 0, 'offsetY': 0}, {'name': 'j', 'offsetX': 620, 'offsetY': 0}],
-    [{'ancname': 'top', 'posX': 620, 'posY': 1600}, {'ancname': 'bottom', 'posX': 620, 'posY': -100}],
-    1240, "0133")
-"""
-# walk through list of targets
-# process 'glyphlist' list of components
-# check that they exist in the font and grab their anchor data
-# calculate component offsets
-# move anchor info to target def
-# flatten components
-# check if this new glyph exists in the font already; if so, decide whether to replace, or issue warning
-# updateGlyph()
-
-
-
-Glyphs.showMacroWindow()
-
-"""
-if thisFont.glyphs[basename] and thisFont.glyphs[markname]:
-    base = thisFont.glyphs[basename]
-    baseRegLayer = base.layers["Regular"]
-    print( baseRegLayer )
-    baseanchor = baseRegLayer.anchors[anchorbase]
-    print( baseanchor )
-    baseX = baseanchor.x
-    print( baseX )
-    baseY = baseanchor.y
-    print( baseY )
-    mark = thisFont.glyphs[markname]
-    markRegLayer = mark.layers["Regular"]
-    print( markRegLayer )
-    markanchor = markRegLayer.anchors[anchormark]
-    print( markanchor )
-    markX = markanchor.x
-    print( markX )
-    markY = markanchor.y
-    print( markY )
-    offsetX = baseX - markX
-    offsetY = baseY - markY
-    target = thisFont.glyphs[targetname]
-    if not target:
-        target = GSGlyph()
-        target.name = targetname
-        thisFont.glyphs.append(target)
-    for thisLayer in target.layers:
-        thisLayer.clear()
-        basecomp = GSComponent(basename)
-        markcomp = GSComponent(markname, NSPoint(offsetX, offsetY))
-        thisLayer.components.append(basecomp)
-        thisLayer.components.append(markcomp)
-else:
-    print("Sources not found in font")
-    """
+    updateExistingGlyph(targetGlyphName, components, targetAnchors, xadvance, uid)
