@@ -4,7 +4,7 @@ from __future__ import division, print_function, unicode_literals
 
 __doc__ = """
 Runs preglyphs from your chosen project folder show the generated file(s)s
-"""s
+"""
 
 __copyright__ = 'Copyright (c) 2021, SIL International  (http://www.sil.org)'
 __license__ = 'Released under the MIT License (http://opensource.org/licenses/MIT)'
